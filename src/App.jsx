@@ -54,7 +54,7 @@ const SProofHomepage = () => {
       <section className="container mx-auto px-6 py-20 text-center">
         <div className="max-w-4xl mx-auto">
           <div className="bg-blue-600/20 text-blue-200 px-4 py-2 rounded-full inline-block mb-6">
-            ⭐ Trusted by 50+ print shops across Arizona
+            ⭐ Built by 12+ year print industry veteran
           </div>
           
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
@@ -69,7 +69,7 @@ const SProofHomepage = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Button className="text-lg px-8 py-4" onClick={handleSignup}>
-              Start Your Free Trial <ArrowRight size={20} />
+              Join Early Access <ArrowRight size={20} />
             </Button>
             <Button variant="outline" className="text-lg px-8 py-4">
               Watch 2-Min Demo
@@ -157,19 +157,19 @@ const SProofHomepage = () => {
       <section className="container mx-auto px-6 py-20">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-white text-center mb-12">
-            What Print Shop Owners Are Saying
+            Built By Print People, For Print People
           </h2>
 
           <GlassCard className="text-center">
             <div className="flex justify-center mb-4">
-              {'⭐'.repeat(5)}
+              🏭
             </div>
             <blockquote className="text-lg text-white mb-4">
-              "S-Proof solved our biggest headache. No more 'did you get my email' calls. 
-              Clients approve proofs faster, we print faster, everyone's happier. Best investment we've made."
+              "After 12 years at Cesargraphics, I know exactly how email-based proofing kills profits. 
+              S-Proof solves the workflow problems I've watched print shops struggle with for over a decade."
             </blockquote>
             <cite className="text-blue-300">
-              — Caesar Salas, Owner, Cesargraphics (12+ years in business)
+              — Isaac Salas, Founder & Computer Science Graduate
             </cite>
           </GlassCard>
         </div>
@@ -237,7 +237,7 @@ const SProofHomepage = () => {
                 </li>
               </ul>
               <Button variant="outline" className="w-full" onClick={handleSignup}>
-                Start Free Trial
+                Join Waitlist
               </Button>
             </GlassCard>
 
@@ -267,14 +267,14 @@ const SProofHomepage = () => {
                 </li>
               </ul>
               <Button className="w-full" onClick={handleSignup}>
-                Start Professional Trial
+                Join Early Access
               </Button>
             </GlassCard>
           </div>
 
           <div className="text-center mt-8">
             <p className="text-white/60">
-              💡 <strong className="text-white">ROI:</strong> Saves $600+ monthly in labor costs. Pays for itself in 5 days.
+              💡 <strong className="text-white">Projected ROI:</strong> Save $600+ monthly in labor costs vs. email-based workflows.
             </p>
           </div>
         </div>
@@ -284,19 +284,19 @@ const SProofHomepage = () => {
       <section className="container mx-auto px-6 py-20 text-center">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-4xl font-bold text-white mb-6">
-            Ready to Stop Losing Money?
+            Ready to Transform Your Proof Process?
           </h2>
           <p className="text-xl text-white/80 mb-8">
-            Join 50+ print shops who've transformed their proof process. 
-            Start your free trial today - no credit card required.
+            Join the waitlist for early access. Currently implementing at Cesargraphics 
+            with plans to expand to print shops across Arizona.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button className="text-lg px-8 py-4" onClick={handleSignup}>
-              Start Your Free Trial <ArrowRight size={20} />
+              Join Early Access <ArrowRight size={20} />
             </Button>
             <Button variant="outline" className="text-lg px-8 py-4">
-              Schedule Demo Call
+              Watch Demo Video
             </Button>
           </div>
 
