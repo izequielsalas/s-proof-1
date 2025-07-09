@@ -1,9 +1,11 @@
+// src/App.jsx
 import React, { useState } from 'react';
-import { ArrowRight, CheckCircle, Clock, DollarSign, Users, Mail, FileText, Smartphone, Menu, X } from 'lucide-react';
+import { ArrowRight, CheckCircle, Clock, DollarSign, Mail, FileText, Smartphone, Menu, X } from 'lucide-react';
+import WaitlistForm from './components/WaitlistForm';
 
-// Mobile-optimized Button component
-const Button = ({ children, className = '', variant = 'primary', size = 'default', ...props }) => {
-  const baseClasses = 'rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 touch-manipulation';
+// Your existing Button component
+const Button = ({ children, className = '', variant = 'primary', size = 'default', disabled = false, onClick, ...props }) => {
+  const baseClasses = 'rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 touch-manipulation disabled:opacity-50 disabled:cursor-not-allowed';
   
   const sizes = {
     small: 'px-4 py-2 text-sm min-h-[40px]',
@@ -12,19 +14,24 @@ const Button = ({ children, className = '', variant = 'primary', size = 'default
   };
   
   const variants = {
-    primary: 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl',
+    primary: 'bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl disabled:hover:bg-blue-600',
     secondary: 'bg-gray-200 hover:bg-gray-300 text-gray-800',
     outline: 'border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
   };
   
   return (
-    <button className={`${baseClasses} ${sizes[size]} ${variants[variant]} ${className}`} {...props}>
+    <button 
+      className={`${baseClasses} ${sizes[size]} ${variants[variant]} ${className}`} 
+      disabled={disabled}
+      onClick={onClick}
+      {...props}
+    >
       {children}
     </button>
   );
 };
 
-// Mobile-optimized Glass Card component
+// Your existing GlassCard component
 const GlassCard = ({ children, className = '' }) => {
   return (
     <div className={`backdrop-blur-sm bg-white/10 border border-white/20 rounded-xl p-4 sm:p-6 shadow-xl ${className}`}>
@@ -33,11 +40,17 @@ const GlassCard = ({ children, className = '' }) => {
   );
 };
 
-const SProofHomepage = () => {
-  const [email, setEmail] = useState('');
+const App = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showWaitlist, setShowWaitlist] = useState(false);
 
+  // NEW: Handle waitlist signup - replaces your existing signup function
   const handleSignup = () => {
+    setShowWaitlist(true);
+  };
+
+  // Function to access existing app (for login)
+  const handleLogin = () => {
     window.open('https://proofingapp1.web.app', '_blank');
   };
 
@@ -45,10 +58,19 @@ const SProofHomepage = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const closeWaitlist = () => {
+    setShowWaitlist(false);
+  };
+
+  const handleWaitlistSuccess = () => {
+    // Waitlist form will show success message
+    // Keep modal open so user can see confirmation
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
-      {/* Mobile-Optimized Navigation */}
-      <nav className="sticky top-0 z-50 backdrop-blur-md bg-black/20 border-b border-white/10">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-40 backdrop-blur-md bg-black/20 border-b border-white/10">
         <div className="container mx-auto px-4 sm:px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="text-xl sm:text-2xl font-bold text-white">
@@ -59,7 +81,7 @@ const SProofHomepage = () => {
             <div className="hidden md:flex items-center gap-6">
               <a href="#pricing" className="text-white/80 hover:text-white transition-colors">Pricing</a>
               <a href="#demo" className="text-white/80 hover:text-white transition-colors">Demo</a>
-              <Button variant="outline" size="small" onClick={handleSignup}>Login</Button>
+              <Button variant="outline" size="small" onClick={handleLogin}>Login</Button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -78,7 +100,7 @@ const SProofHomepage = () => {
               <div className="flex flex-col gap-4 pt-4">
                 <a href="#pricing" className="text-white/80 hover:text-white transition-colors text-center py-2">Pricing</a>
                 <a href="#demo" className="text-white/80 hover:text-white transition-colors text-center py-2">Demo</a>
-                <Button variant="outline" size="default" onClick={handleSignup} className="w-full">
+                <Button variant="outline" size="default" onClick={handleLogin} className="w-full">
                   Login
                 </Button>
               </div>
@@ -87,14 +109,13 @@ const SProofHomepage = () => {
         </div>
       </nav>
 
-      {/* Mobile-Optimized Hero Section */}
+      {/* Hero Section */}
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 text-center">
         <div className="max-w-4xl mx-auto">
           <div className="bg-blue-600/20 text-blue-200 px-3 py-2 rounded-full inline-block mb-6 text-sm sm:text-base">
             ⭐ Built by 12+ year print industry veteran
           </div>
           
-          {/* Responsive Hero Title */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
             Stop Losing Money On 
             <span className="block sm:inline text-blue-400"> Proof Revisions</span>
@@ -105,7 +126,6 @@ const SProofHomepage = () => {
             and save $600+ monthly in labor costs.
           </p>
 
-          {/* Mobile-First CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 sm:mb-12">
             <Button size="large" onClick={handleSignup} className="w-full sm:w-auto">
               Join Early Access <ArrowRight size={20} />
@@ -115,7 +135,6 @@ const SProofHomepage = () => {
             </Button>
           </div>
 
-          {/* Mobile-Optimized Trust Indicators */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 text-white/60 text-sm">
             <div className="flex items-center gap-2">
               <CheckCircle size={16} />
@@ -133,7 +152,7 @@ const SProofHomepage = () => {
         </div>
       </section>
 
-      {/* Mobile-Optimized Problem/Solution Section */}
+      {/* Problem/Solution Section */}
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Problem */}
@@ -194,7 +213,7 @@ const SProofHomepage = () => {
         </div>
       </section>
 
-      {/* Mobile-Optimized Social Proof */}
+      {/* Social Proof */}
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-8 sm:mb-12">
@@ -216,10 +235,10 @@ const SProofHomepage = () => {
         </div>
       </section>
 
-      {/* Mobile-Optimized Features/Benefits */}
+      {/* Features */}
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
         <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-8 sm:mb-12">
-          Built BY Print People, FOR Print People
+          Why Print Shops Love S-Proof
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -241,18 +260,9 @@ const SProofHomepage = () => {
             <p className="text-white/80 text-sm sm:text-base leading-relaxed">Automatically bill for approved changes. Never lose money on scope creep again.</p>
           </GlassCard>
         </div>
-
-        <div className="text-center mt-8 sm:mt-12">
-          <p className="text-white/60 text-sm mb-4">
-            Built by Isaac Salas - Computer Science graduate with 12+ years in the print industry
-          </p>
-          <p className="text-blue-300 text-sm sm:text-base">
-            "Finally, proofing software that understands print shops"
-          </p>
-        </div>
       </section>
 
-      {/* Mobile-Optimized Pricing Preview */}
+      {/* Pricing */}
       <section id="pricing" className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-8 sm:mb-12">
@@ -288,7 +298,7 @@ const SProofHomepage = () => {
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Professional</h3>
               <div className="text-2xl sm:text-3xl font-bold text-white mb-1">$97<span className="text-base sm:text-lg text-white/60">/month</span></div>
-              <div className="text-green-400 text-sm mb-4">Save $67/month with annual plan</div>
+              <div className="text-green-400 text-sm mb-4">Save 30% with annual plan</div>
               <ul className="space-y-2 text-white/80 mb-6 text-sm sm:text-base">
                 <li className="flex items-center gap-2">
                   <CheckCircle size={16} className="text-green-400 flex-shrink-0" />
@@ -321,7 +331,7 @@ const SProofHomepage = () => {
         </div>
       </section>
 
-      {/* Mobile-Optimized Final CTA */}
+      {/* Final CTA */}
       <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 text-center">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6 leading-tight">
@@ -347,7 +357,7 @@ const SProofHomepage = () => {
         </div>
       </section>
 
-      {/* Mobile-Optimized Footer */}
+      {/* Footer */}
       <footer className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 border-t border-white/10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           <div className="col-span-2 md:col-span-1">
@@ -360,7 +370,7 @@ const SProofHomepage = () => {
             <h4 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Product</h4>
             <ul className="space-y-2 text-white/60 text-sm">
               <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
+              <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Demo</a></li>
             </ul>
           </div>
@@ -385,8 +395,20 @@ const SProofHomepage = () => {
           <p>&copy; 2025 S-Proof. Built by Isaac Salas in Phoenix, Arizona.</p>
         </div>
       </footer>
+
+      {/* Waitlist Modal - NEW ADDITION */}
+      {showWaitlist && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
+          <div className="max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <WaitlistForm 
+              onSuccess={handleWaitlistSuccess}
+              onClose={closeWaitlist}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default SProofHomepage;
+export default App;
