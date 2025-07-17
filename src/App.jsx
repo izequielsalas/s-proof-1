@@ -44,7 +44,7 @@ const App = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showWaitlist, setShowWaitlist] = useState(false);
 
-  // NEW: Handle waitlist signup - replaces your existing signup function
+  // Handle waitlist signup
   const handleSignup = () => {
     setShowWaitlist(true);
   };
@@ -131,7 +131,7 @@ const App = () => {
               Join Early Access <ArrowRight size={20} />
             </Button>
             <Button variant="outline" size="large" className="w-full sm:w-auto">
-              Watch 2-Min Demo
+              Watch 2-Min Demo (coming soon)
             </Button>
           </div>
 
@@ -143,10 +143,6 @@ const App = () => {
             <div className="flex items-center gap-2">
               <CheckCircle size={16} />
               5-minute setup
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle size={16} />
-              Used by 50+ shops
             </div>
           </div>
         </div>
@@ -297,12 +293,12 @@ const App = () => {
                 Most Popular
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Professional</h3>
-              <div className="text-2xl sm:text-3xl font-bold text-white mb-1">$97<span className="text-base sm:text-lg text-white/60">/month</span></div>
+              <div className="text-2xl sm:text-3xl font-bold text-white mb-1">$37<span className="text-base sm:text-lg text-white/60">/month</span></div>
               <div className="text-green-400 text-sm mb-4">Save 30% with annual plan</div>
               <ul className="space-y-2 text-white/80 mb-6 text-sm sm:text-base">
                 <li className="flex items-center gap-2">
                   <CheckCircle size={16} className="text-green-400 flex-shrink-0" />
-                  Unlimited proofs
+                  100GB storage
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle size={16} className="text-green-400 flex-shrink-0" />
@@ -339,7 +335,7 @@ const App = () => {
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-white/80 mb-6 sm:mb-8 leading-relaxed">
             Join the waitlist for early access. Currently implementing at Cesargraphics 
-            with plans to expand to print shops across Arizona.
+            with plans to expand to more printshops, graphic designers, photographers, and agencies across Arizona.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -347,12 +343,12 @@ const App = () => {
               Join Early Access <ArrowRight size={20} />
             </Button>
             <Button variant="outline" size="large" className="w-full sm:w-auto">
-              Watch Demo Video
+              Watch Demo Video (coming soon)
             </Button>
           </div>
 
           <p className="text-white/60 text-sm mt-6">
-            Questions? Email isaac@s-proof.app or call (480) 555-PROOF
+            Questions? Email isaac@s-proof.app
           </p>
         </div>
       </section>
@@ -396,7 +392,7 @@ const App = () => {
         </div>
       </footer>
 
-      {/* Waitlist Modal - NEW ADDITION */}
+      {/* Waitlist Modal */}
       {showWaitlist && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
           <div className="max-w-lg w-full max-h-[90vh] overflow-y-auto">
